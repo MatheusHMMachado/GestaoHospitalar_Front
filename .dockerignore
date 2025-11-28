@@ -1,0 +1,25 @@
+# Dependências locais
+node_modules
+npm-debug.log
+
+# Pastas de Build
+dist
+build
+out
+.next
+
+# Controle de versão e IDEs
+.git
+.gitignore
+.vscode
+.idea
+
+# Arquivos de ambiente locais
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs e arquivos de sistema
+.DS_Store
+Thumbs.db
