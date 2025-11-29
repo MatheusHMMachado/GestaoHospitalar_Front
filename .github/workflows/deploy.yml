@@ -10,22 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Validando alterações no codigo, e arquivo deploy.yml
         uses: actions/checkout@v4
 
-      - name: Configure AWS Credentials
+      - name: Configurando credenciais AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1 
 
-      - name: Get GitHub Actions IP
+      - name: Obtendo IP público do GitHub Actions
         id: ip
         run: |
           echo "ipv4=$(curl -s https://checkip.amazonaws.com)" >> $GITHUB_OUTPUT
 
-      - name: Open SSH Port (Just-in-Time)
+      - name: Abrindo porta SSH(Just-in-Time)
         run: |
           aws ec2 authorize-security-group-ingress \
             --group-id ${{ secrets.AWS_SG_ID }} \
@@ -33,7 +33,7 @@ jobs:
             --port 22 \
             --cidr ${{ steps.ip.outputs.ipv4 }}/32
 
-      - name: Deploy to EC2 via SSH
+      - name: Enviando o deploy para a EC2 e executando o script
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -49,7 +49,7 @@ jobs:
             # Executa o script de deploy na EC2
             /home/ubuntu/deploy.sh
 
-      - name: Close SSH Port (Always run)
+      - name: Fechando porta SSH(Mesmo se falar)
         if: always() # Garante que rode mesmo se o deploy falhar
         run: |
           aws ec2 revoke-security-group-ingress \

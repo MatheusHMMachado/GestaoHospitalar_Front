@@ -91,7 +91,7 @@ const LoginForm = () => {
 
   const handleForgotPassword = () => {
     // In real app, this would navigate to forgot password page
-    alert('Forgot password functionality would be implemented here');
+    alert('A funcionalidade de recuperação de senha está em desenvolvimento.');
   };
 
   return (
