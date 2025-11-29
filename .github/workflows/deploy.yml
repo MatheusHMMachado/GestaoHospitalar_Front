@@ -28,5 +28,5 @@ jobs:
             #Garante que o script tenha permissão de execução
             chmod +x /home/ubuntu/deploy.sh
 
-            #Executa o script de deploy
+            #Executa o script de deploy.
             /home/ubuntu/deploy.sh
