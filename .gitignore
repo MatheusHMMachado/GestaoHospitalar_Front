@@ -6,4 +6,3 @@ package-lock.json
 /dist
 .vscode/
 .idea/
-vite.config.mjs

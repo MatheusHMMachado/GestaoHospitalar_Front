@@ -17,7 +17,7 @@ export default defineConfig({
     proxy: {
       //Captura todas as requisições que começam com /api e redireciona para o backend
       '/api': {
-        target: 'http://localhost:8080', //Redireciona para o backend
+        target: 'http://localhost:8080', //Redireciona para o backend.
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, '/api'),
