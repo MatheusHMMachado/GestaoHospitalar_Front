@@ -1,0 +1,32 @@
+name: Deploy Frontend to EC2
+
+# Gatilho: Roda sempre que houver um push na branch main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          # O script que será executado no servidor EC2
+          script:
+            echo "Github Actions conectou na EC2 com sucesso"
+
+            #Garante que o script tenha permissão de execução
+            chmod +x /home/ubuntu/deploy.sh
+
+            #Executa o script de deploy
+            /home/ubuntu/deploy.sh
