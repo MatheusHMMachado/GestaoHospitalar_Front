@@ -1,10 +1,10 @@
 name: Deploy Frontend to EC2
 
-# Gatilho: Roda sempre que houver um push na branch main
+# Gatilho: Roda sempre que houver um push na branch main (ou master)
 on:
   push:
     branches:
-      - main
+      - main 
 
 jobs:
   deploy:
@@ -21,12 +21,12 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
-          # O script que será executado no servidor EC2
-          script:
-            echo "Github Actions conectou na EC2 com sucesso"
-
-            #Garante que o script tenha permissão de execução
+          # O script que será executado dentro da EC2
+          script: |
+            echo "GitHub Actions conectou na EC2..."
+            
+            # Garante que o script tem permissão de execução
             chmod +x /home/ubuntu/deploy.sh
-
-            #Executa o script de deploy.
+            
+            # Executa o script que criamos anteriormente
             /home/ubuntu/deploy.sh
