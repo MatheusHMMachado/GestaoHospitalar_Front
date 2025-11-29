@@ -3,7 +3,7 @@ import Header from '../../components/ui/Header';
 import BreadcrumbTrail from '../../components/ui/BreadcrumbTrail';
 import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
-import Input from '../../components/ui/Input';
+import Input from '../../components/ui/input';
 import Select from '../../components/ui/Select';
 import DoctorCard from './components/DoctorCard';
 import DoctorTable from './components/DoctorTable';
