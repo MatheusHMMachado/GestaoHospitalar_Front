@@ -30,7 +30,7 @@ const LoginPage = () => {
             <div className="flex items-center justify-center space-x-4 mt-2 text-xs text-muted-foreground">
               <span>Política de privacidade</span>
               <span>•</span>
-              <span>Termos de serviço</span>
+              <span>Termos de uso</span>
               <span>•</span>
               <span>Suporte</span>
             </div>
