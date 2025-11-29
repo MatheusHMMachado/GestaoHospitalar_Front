@@ -1,11 +1,11 @@
 # --- ESTÁGIO 1: Build --- (Usanddo Node.js 18 Alpine)
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 # Copia arquivos de dependências e instala
-COPY package.json package-lock.json ./
-RUN npm install
+COPY package.json ./
+RUN npm install --legacy-peer-deps
 
 # Copia todo o código fonte e faz o build (O vite gera a pasta 'dist')
 COPY . .
