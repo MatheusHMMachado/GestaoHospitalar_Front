@@ -7,19 +7,19 @@ const TrustSignals = () => {
       id: 1,
       name: 'HIPAA Compliant',
       icon: 'Shield',
-      description: 'Healthcare data protection certified'
+      description: 'Certificado para conformidade com HIPAA para proteção de dados de saúde'
     },
     {
       id: 2,
       name: 'SSL Secured',
       icon: 'Lock',
-      description: '256-bit encryption for all data'
+      description: 'Encriptação de 256 bits ativa para todos os dados'
     },
     {
       id: 3,
       name: 'SOC 2 Certified',
       icon: 'CheckCircle',
-      description: 'Security and availability verified'
+      description: 'Segurança e privacidade de dados auditadas'
     }
   ];
 
@@ -27,7 +27,7 @@ const TrustSignals = () => {
     <div className="mt-8 pt-6 border-t border-border">
       <div className="text-center mb-4">
         <p className="text-xs text-muted-foreground font-medium">
-          Trusted by healthcare professionals worldwide
+          Aprovado por profissionais de saúde em todo o mundo.
         </p>
       </div>
       <div className="flex items-center justify-center space-x-6">
@@ -48,7 +48,7 @@ const TrustSignals = () => {
       </div>
       <div className="mt-4 text-center">
         <p className="text-xs text-muted-foreground">
-          Your medical data is protected with enterprise-grade security
+          Seus dados médicos estão protegidos com segurança de nível empresarial.
         </p>
       </div>
     </div>

@@ -1,6 +1,7 @@
 # Dependências locais
 node_modules
 npm-debug.log
+package-lock.json
 
 # Pastas de Build
 dist

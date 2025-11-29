@@ -25,15 +25,15 @@ const LoginForm = () => {
     const newErrors = {};
 
     if (!formData?.email) {
-      newErrors.email = 'Email address is required';
+      newErrors.email = 'Email é obrigatório';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/?.test(formData?.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = 'Por favor, insira um endereço de email válido';
     }
 
     if (!formData?.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = 'Senha é obrigatória';
     } else if (formData?.password?.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = 'A senha deve ter pelo menos 6 caracteres';
     }
 
     setErrors(newErrors);
@@ -81,7 +81,7 @@ const LoginForm = () => {
         navigate('/dashboard');
       } else {
         setErrors({
-          general: 'Invalid email or password. Please check your credentials and try again.'
+          general: 'Endereço de email ou senha inválidos. Por favor, tente novamente.'
         });
       }
       
@@ -99,10 +99,10 @@ const LoginForm = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Email Input */}
         <Input
-          label="Email Address"
+          label="Email"
           type="email"
           name="email"
-          placeholder="Enter your hospital email"
+          placeholder="Entre com seu email:"
           value={formData?.email}
           onChange={handleInputChange}
           error={errors?.email}
@@ -112,10 +112,10 @@ const LoginForm = () => {
 
         {/* Password Input */}
         <Input
-          label="Password"
+          label="Senha"
           type="password"
           name="password"
-          placeholder="Enter your password"
+          placeholder="Digite sua senha:"
           value={formData?.password}
           onChange={handleInputChange}
           error={errors?.password}
@@ -139,7 +139,7 @@ const LoginForm = () => {
             className="text-sm text-primary hover:text-primary/80 font-medium transition-colors duration-200"
             disabled={isLoading}
           >
-            Forgot your password?
+            Esqueceu sua senha?
           </button>
         </div>
 
@@ -154,20 +154,20 @@ const LoginForm = () => {
           iconPosition="right"
           disabled={isLoading}
         >
-          {isLoading ? 'Signing In...' : 'Sign In'}
+          {isLoading ? 'Entrando..' : 'Entrar'}
         </Button>
 
         {/* Register Link */}
         <div className="text-center pt-4 border-t border-border">
           <p className="text-sm text-muted-foreground">
-            Need access to the system?{' '}
+            Precisa de acesso ao sistema?{' '}
             <button
               type="button"
               onClick={() => navigate('/user-registration')}
               className="text-primary hover:text-primary/80 font-medium transition-colors duration-200"
               disabled={isLoading}
             >
-              Register New Account
+              Registrar nova conta
             </button>
           </p>
         </div>
