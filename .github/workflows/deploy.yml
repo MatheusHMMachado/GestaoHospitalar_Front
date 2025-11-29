@@ -1,10 +1,9 @@
-name: Deploy Frontend to EC2
+name: Deploy Frontend to EC2 (Secure)
 
-# Gatilho: Roda sempre que houver um push na branch main (ou master)
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   deploy:
@@ -14,6 +13,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1 
+
+      - name: Get GitHub Actions IP
+        id: ip
+        run: |
+          echo "ipv4=$(curl -s https://checkip.amazonaws.com)" >> $GITHUB_OUTPUT
+
+      - name: Open SSH Port (Just-in-Time)
+        run: |
+          aws ec2 authorize-security-group-ingress \
+            --group-id ${{ secrets.AWS_SG_ID }} \
+            --protocol tcp \
+            --port 22 \
+            --cidr ${{ steps.ip.outputs.ipv4 }}/32
+
       - name: Deploy to EC2 via SSH
         uses: appleboy/ssh-action@master
         with:
@@ -21,12 +40,20 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
-          # O script que será executado dentro da EC2
           script: |
             echo "GitHub Actions conectou na EC2..."
             
             # Garante que o script tem permissão de execução
             chmod +x /home/ubuntu/deploy.sh
             
-            # Executa o script que criamos anteriormente
+            # Executa o script de deploy na EC2
             /home/ubuntu/deploy.sh
+
+      - name: Close SSH Port (Always run)
+        if: always() # Garante que rode mesmo se o deploy falhar
+        run: |
+          aws ec2 revoke-security-group-ingress \
+            --group-id ${{ secrets.AWS_SG_ID }} \
+            --protocol tcp \
+            --port 22 \
+            --cidr ${{ steps.ip.outputs.ipv4 }}/32
