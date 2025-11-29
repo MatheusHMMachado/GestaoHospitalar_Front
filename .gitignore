@@ -3,5 +3,7 @@
 .idea
 package-lock.json
 /build
+/dist
 .vscode/
 .idea/
+vite.config.mjs
