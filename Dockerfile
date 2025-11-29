@@ -25,4 +25,4 @@ COPY  --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
 
 # Inicia o Nginx em primeiro plano
-CMD ["nginx", "-g", "deamon off;"]
+CMD ["nginx", "-g", "daemon off;"]
