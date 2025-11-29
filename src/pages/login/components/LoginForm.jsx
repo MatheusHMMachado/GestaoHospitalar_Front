@@ -99,10 +99,10 @@ const LoginForm = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Email Input */}
         <Input
-          label="Email"
+          label="Email:"
           type="email"
           name="email"
-          placeholder="Entre com seu email:"
+          placeholder="Entre com seu email"
           value={formData?.email}
           onChange={handleInputChange}
           error={errors?.email}
@@ -112,10 +112,10 @@ const LoginForm = () => {
 
         {/* Password Input */}
         <Input
-          label="Senha"
+          label="Senha:"
           type="password"
           name="password"
-          placeholder="Digite sua senha:"
+          placeholder="Digite sua senha"
           value={formData?.password}
           onChange={handleInputChange}
           error={errors?.password}

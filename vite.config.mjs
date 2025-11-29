@@ -15,7 +15,7 @@ export default defineConfig({
   server: {
     port: "3000",
     proxy: {
-      //Captura todas as requisições que começam com /api e redireciona para o backend
+      //Captura todas as requisições que começam com /api e redireciona para o backend.
       '/api': {
         target: 'http://localhost:8080', //Redireciona para o backend.
         changeOrigin: true,
