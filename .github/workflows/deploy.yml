@@ -3,12 +3,14 @@ name: Deploy Frontend to EC2 (Secure)
 on:
   push:
     branches:
-      - main
+      - main # Deploy quando entrar na main
+      - tests  # Apenas teste de compilação quando entrar na tests
 
 jobs:
-  deploy:
+  deploy-production:
+    if: github.ref == 'refs/heads/main' # Só roda se for a branch MAIN
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Validando alterações no codigo, e arquivo deploy.yml
         uses: actions/checkout@v4
