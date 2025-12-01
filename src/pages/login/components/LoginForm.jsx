@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../../../components/ui/Button';
 import Input from '../../../components/ui/Input';
 import Icon from '../../../components/AppIcon';
+
+const API_URL = import.meta.env.VITE_API_URL; 
+const API_TOKEN = import.meta.env.VITE_API_TOKEN; // O mesmo do Backend
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -13,41 +16,32 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // Mock credentials for different user roles
-  const mockCredentials = {
-    'admin@hospitalcare.com': { password: 'admin123', role: 'Administrator' },
-    'doctor@hospitalcare.com': { password: 'doctor123', role: 'Doctor' },
-    'nurse@hospitalcare.com': { password: 'nurse123', role: 'Nurse' },
-    'reception@hospitalcare.com': { password: 'reception123', role: 'Receptionist' }
-  };
-
   const validateForm = () => {
     const newErrors = {};
 
     if (!formData?.email) {
       newErrors.email = 'Email é obrigatório';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/?.test(formData?.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData?.email)) {
       newErrors.email = 'Por favor, insira um endereço de email válido';
     }
 
     if (!formData?.password) {
       newErrors.password = 'Senha é obrigatória';
-    } else if (formData?.password?.length < 6) {
-      newErrors.password = 'A senha deve ter pelo menos 6 caracteres';
+    } else if (formData?.password?.length < 8) {
+      newErrors.password = 'A senha deve ter pelo menos 8 caracteres';
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors)?.length === 0;
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e?.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
     
-    // Clear error when user starts typing
     if (errors?.[name]) {
       setErrors(prev => ({
         ...prev,
@@ -64,74 +58,92 @@ const LoginForm = () => {
     }
 
     setIsLoading(true);
+    setErrors({}); // Limpa erros antigos
 
-    // Simulate API call delay
-    setTimeout(() => {
-      const user = mockCredentials?.[formData?.email];
-      
-      if (user && user?.password === formData?.password) {
-        // Store user session (in real app, this would be JWT)
-        localStorage.setItem('hospitalcare_user', JSON.stringify({
-          email: formData?.email,
-          role: user?.role,
-          loginTime: new Date()?.toISOString()
+    try {
+      // 2. CHAMADA O BACKEND
+      const response = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-TOKEN': API_TOKEN
+        },
+        body: JSON.stringify({ 
+            email: formData.email, 
+            senha: formData.password 
+        })
+      });
+
+      // 4. TRATAMENTO DE RESPOSTA
+      if (response.ok) {
+        const data = await response.json();
+        
+        // Sucesso: Salva o token e dados do usuário
+        localStorage.setItem('user_token', data.token);
+        localStorage.setItem('user_data', JSON.stringify({
+            nome: data.nome,
+            perfil: data.perfil,
+            email: formData.email
         }));
         
-        // Navigate to dashboard
-        navigate('/dashboard');
+        const origin = location.state?.from?.pathname || '/dashboard';
+        navigate(origin);
       } else {
+        // Erro: Tenta ler a mensagem de texto enviada pelo Backend (ex: "Senha inválida")
+        const errorMessage = await response.text();
         setErrors({
-          general: 'Endereço de email ou senha inválidos. Por favor, tente novamente.'
+          general: errorMessage || 'Falha ao realizar login. Verifique suas credenciais.'
         });
       }
-      
+
+    } catch (error) {
+      console.error("Erro de conexão:", error);
+      setErrors({
+        general: 'Erro de conexão com o servidor.'
+      });
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   const handleForgotPassword = () => {
-    // In real app, this would navigate to forgot password page
     alert('A funcionalidade de recuperação de senha está em desenvolvimento.');
   };
 
   return (
     <div className="w-full max-w-md mx-auto">
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Email Input */}
         <Input
           label="Email:"
           type="email"
           name="email"
           placeholder="Entre com seu email"
-          value={formData?.email}
+          value={formData.email}
           onChange={handleInputChange}
-          error={errors?.email}
+          error={errors.email}
           required
           disabled={isLoading}
         />
 
-        {/* Password Input */}
         <Input
           label="Senha:"
           type="password"
           name="password"
           placeholder="Digite sua senha"
-          value={formData?.password}
+          value={formData.password}
           onChange={handleInputChange}
-          error={errors?.password}
+          error={errors.password}
           required
           disabled={isLoading}
         />
 
-        {/* General Error Message */}
-        {errors?.general && (
+        {errors.general && (
           <div className="flex items-center space-x-2 p-3 bg-red-50 border border-red-200 rounded-lg">
             <Icon name="AlertCircle" size={16} className="text-red-500 flex-shrink-0" />
-            <p className="text-sm text-red-700">{errors?.general}</p>
+            <p className="text-sm text-red-700">{errors.general}</p>
           </div>
         )}
 
-        {/* Forgot Password Link */}
         <div className="text-right">
           <button
             type="button"
@@ -143,7 +155,6 @@ const LoginForm = () => {
           </button>
         </div>
 
-        {/* Sign In Button */}
         <Button
           type="submit"
           variant="default"
@@ -154,10 +165,9 @@ const LoginForm = () => {
           iconPosition="right"
           disabled={isLoading}
         >
-          {isLoading ? 'Entrando..' : 'Entrar'}
+          {isLoading ? 'Entrando...' : 'Entrar'}
         </Button>
 
-        {/* Register Link */}
         <div className="text-center pt-4 border-t border-border">
           <p className="text-sm text-muted-foreground">
             Precisa de acesso ao sistema?{' '}

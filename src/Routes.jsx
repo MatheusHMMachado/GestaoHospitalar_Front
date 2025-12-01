@@ -9,6 +9,7 @@ import DoctorManagement from './pages/doctor-management';
 import Dashboard from './pages/dashboard';
 import AppointmentScheduling from './pages/appointment-scheduling';
 import UserRegistration from './pages/user-registration';
+import ProtectedRoute from "./ProtectedRoute";
 
 const Routes = () => {
   return (
@@ -16,14 +17,23 @@ const Routes = () => {
       <ErrorBoundary>
       <ScrollToTop />
       <RouterRoutes>
-        {/* Define your route here */}
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/patient-management" element={<PatientManagement />} />
+        {/* --- ROTAS PÚBLICAS --- */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/doctor-management" element={<DoctorManagement />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/appointment-scheduling" element={<AppointmentScheduling />} />
         <Route path="/user-registration" element={<UserRegistration />} />
+        
+        {/* Redireciona a raiz para o login ou dashboard */}
+        <Route path="/" element={<LoginPage/>} />
+
+        {/* --- ROTAS PRIVADAS (Protegidas pelo Guardião) --- */}
+        <Route element={<ProtectedRoute />}>
+          {/* Todas as rotas aqui dentro exigem token válido */}
+          <Route path="/patient-management" element={<PatientManagement />} />
+          <Route path="/doctor-management" element={<DoctorManagement />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/appointment-scheduling" element={<AppointmentScheduling />} />
+        </Route>
+
+        {/* Rota 404 - Página não encontrada */}
         <Route path="*" element={<NotFound />} />
       </RouterRoutes>
       </ErrorBoundary>

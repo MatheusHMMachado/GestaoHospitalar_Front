@@ -15,17 +15,17 @@ const Header = () => {
       icon: 'LayoutDashboard'
     },
     {
-      label: 'Patients',
+      label: 'Pacientes',
       path: '/patient-management',
       icon: 'Users'
     },
     {
-      label: 'Doctors',
+      label: 'Doutores',
       path: '/doctor-management',
       icon: 'UserCheck'
     },
     {
-      label: 'Appointments',
+      label: 'Agendamentos',
       path: '/appointment-scheduling',
       icon: 'Calendar'
     }
@@ -42,7 +42,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-1000 bg-clinical-white border-b border-border shadow-medical-sm">
       <div className="flex items-center justify-between h-16 px-6">
-        {/* Logo Section */}
+        {/* Seção para o Logo */}
         <div className="flex items-center">
           <Link to="/dashboard" className="flex items-center space-x-3">
             <div className="flex items-center justify-center w-10 h-10 bg-primary rounded-lg">
@@ -72,7 +72,7 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* Right Section */}
+        {/* Seleção direita*/}
         <div className="flex items-center space-x-4">
           <NotificationBadge />
           <UserProfileDropdown />

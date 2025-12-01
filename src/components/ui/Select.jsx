@@ -1,4 +1,3 @@
-// components/ui/Select.jsx - Shadcn style Select
 import React, { useState } from "react";
 import { ChevronDown, Check, Search, X } from "lucide-react";
 import { cn } from "../../utils/cn";
@@ -10,7 +9,7 @@ const Select = React.forwardRef(({
     options = [],
     value,
     defaultValue,
-    placeholder = "Select an option",
+    placeholder = "Selecione uma opção",
     multiple = false,
     disabled = false,
     required = false,
@@ -29,10 +28,10 @@ const Select = React.forwardRef(({
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
 
-    // Generate unique ID if not provided
+    // Gere um ID único caso não seja fornecido.
     const selectId = id || `select-${Math.random()?.toString(36)?.substr(2, 9)}`;
 
-    // Filter options based on search
+    // Opções de filtro com base na pesquisa
     const filteredOptions = searchable && searchTerm
         ? options?.filter(option =>
             option?.label?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
@@ -40,7 +39,7 @@ const Select = React.forwardRef(({
         )
         : options;
 
-    // Get selected option(s) for display
+    // Exibir as opções selecionadas
     const getSelectedDisplay = () => {
         if (!value) return placeholder;
 
@@ -48,7 +47,7 @@ const Select = React.forwardRef(({
             const selectedOptions = options?.filter(opt => value?.includes(opt?.value));
             if (selectedOptions?.length === 0) return placeholder;
             if (selectedOptions?.length === 1) return selectedOptions?.[0]?.label;
-            return `${selectedOptions?.length} items selected`;
+            return `${selectedOptions?.length} itens selecionados`;
         }
 
         const selectedOption = options?.find(opt => opt?.value === value);
@@ -153,17 +152,17 @@ const Select = React.forwardRef(({
                     </div>
                 </button>
 
-                {/* Hidden native select for form submission */}
+                {/* Seleção nativa oculta para envio de formulário */}
                 <select
                     name={name}
                     value={value || ''}
-                    onChange={() => { }} // Controlled by our custom logic
+                    onChange={() => { }} // Controlado pela nossa lógica personalizada.
                     className="sr-only"
                     tabIndex={-1}
                     multiple={multiple}
                     required={required}
                 >
-                    <option value="">Select...</option>
+                    <option value="">Selecione...</option>
                     {options?.map(option => (
                         <option key={option?.value} value={option?.value}>
                             {option?.label}
@@ -179,7 +178,7 @@ const Select = React.forwardRef(({
                                 <div className="relative">
                                     <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                                     <Input
-                                        placeholder="Search options..."
+                                        placeholder="Opções de pesquisa..."
                                         value={searchTerm}
                                         onChange={handleSearchChange}
                                         className="pl-8"
@@ -191,7 +190,7 @@ const Select = React.forwardRef(({
                         <div className="py-1 max-h-60 overflow-auto">
                             {filteredOptions?.length === 0 ? (
                                 <div className="px-3 py-2 text-sm text-muted-foreground">
-                                    {searchTerm ? 'No options found' : 'No options available'}
+                                    {searchTerm ? 'Nenhuma opção encontrada' : 'Nenhuma opção disponível'}
                                 </div>
                             ) : (
                                 filteredOptions?.map((option) => (

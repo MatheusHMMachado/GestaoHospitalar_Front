@@ -8,62 +8,62 @@ const CalendarWidget = () => {
     {
       id: 1,
       time: "09:00 AM",
-      patient: "Emma Thompson",
-      doctor: "Dr. Sarah Johnson",
-      type: "Consultation",
-      status: "confirmed",
-      room: "Room 101"
+      patient: "Julia de padua",
+      doctor: "Dra. Gabriela da silva",
+      type: "Consulta",
+      status: "Confirmado",
+      room: "Quarto 101"
     },
     {
       id: 2,
       time: "10:30 AM",
       patient: "Michael Rodriguez",
-      doctor: "Dr. James Wilson",
-      type: "Follow-up",
-      status: "in-progress",
-      room: "Room 205"
+      doctor: "Dra. Gabriela da silva",
+      type: "Seguir",
+      status: "Em progresso",
+      room: "Quarto 205"
     },
     {
       id: 3,
       time: "02:00 PM",
-      patient: "Lisa Chen",
-      doctor: "Dr. Sarah Johnson",
-      type: "Surgery",
-      status: "scheduled",
-      room: "OR-1"
+      patient: "Marcela marques",
+      doctor: "Dra. Gabriela da silva",
+      type: "Cirurgia",
+      status: "Agendado",
+      room: "Quarto 450"
     },
     {
       id: 4,
       time: "03:30 PM",
-      patient: "Robert Davis",
+      patient: "Roberto de almeida",
       doctor: "Dr. Maria Garcia",
       type: "Check-up",
-      status: "confirmed",
-      room: "Room 103"
+      status: "Confirmado",
+      room: "Quarto 103"
     },
     {
       id: 5,
       time: "04:45 PM",
-      patient: "Jennifer Wilson",
-      doctor: "Dr. James Wilson",
-      type: "Consultation",
-      status: "scheduled",
-      room: "Room 201"
+      patient: "Jennifer mendes",
+      doctor: "Dr. Wellington oliveira",
+      type: "Consulta",
+      status: "Agendado",
+      room: "Quarto 201"
     }
   ];
 
   const getStatusColor = (status) => {
     const colors = {
-      confirmed: "bg-success-green/10 text-success-green border-success-green/20",
-      "in-progress": "bg-caution-amber/10 text-caution-amber border-caution-amber/20",
-      scheduled: "bg-medical-blue/10 text-medical-blue border-medical-blue/20",
-      cancelled: "bg-alert-red/10 text-alert-red border-alert-red/20"
+      Confirmado: "bg-success-green/10 text-success-green border-success-green/20",
+      "Em progresso": "bg-caution-amber/10 text-caution-amber border-caution-amber/20",
+      Agendado: "bg-medical-blue/10 text-medical-blue border-medical-blue/20",
+      Cancelado: "bg-alert-red/10 text-alert-red border-alert-red/20"
     };
-    return colors?.[status] || colors?.scheduled;
+    return colors?.[status] || colors?.Agendado;
   };
 
   const formatDate = (date) => {
-    return date?.toLocaleDateString('en-US', {
+    return date?.toLocaleDateString('Pt-BR', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
@@ -75,7 +75,7 @@ const CalendarWidget = () => {
     <div className="medical-card p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-lg font-semibold text-foreground">Today's Schedule</h2>
+          <h2 className="text-lg font-semibold text-foreground">Programação de hoje</h2>
           <p className="text-sm text-muted-foreground">{formatDate(currentDate)}</p>
         </div>
         <Icon name="Calendar" size={20} className="text-muted-foreground" />
@@ -111,7 +111,7 @@ const CalendarWidget = () => {
       </div>
       <div className="mt-4 pt-4 border-t border-border">
         <button className="w-full text-sm text-primary hover:text-primary/80 font-medium">
-          View Full Calendar
+          Ver calendário completo
         </button>
       </div>
     </div>
