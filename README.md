@@ -1,99 +1,89 @@
 # GestaoHospitalar_Front
 # React
 
-A modern React-based project utilizing the latest frontend technologies and tools for building responsive web applications.
+Um projeto moderno baseado em React que utiliza as mais recentes tecnologias e ferramentas de front-end para a criação de aplicações web responsivas.
 
-## 🚀 Features
+# ## 🚀 Recursos
 
-- **React 18** - React version with improved rendering and concurrent features
-- **Vite** - Lightning-fast build tool and development server
-- **Redux Toolkit** - State management with simplified Redux setup
-- **TailwindCSS** - Utility-first CSS framework with extensive customization
-- **React Router v6** - Declarative routing for React applications
-- **Data Visualization** - Integrated D3.js and Recharts for powerful data visualization
-- **Form Management** - React Hook Form for efficient form handling
-- **Animation** - Framer Motion for smooth UI animations
-- **Testing** - Jest and React Testing Library setup
+- **React 18** - Versão do React com renderização aprimorada e recursos de concorrência
+- **Vite** - Ferramenta de compilação e servidor de desenvolvimento extremamente rápidos
+- **Redux Toolkit** - Gerenciamento de estado com configuração simplificada do Redux
+- **TailwindCSS** - Framework CSS utilitário com ampla personalização
+- **React Router v6** - Roteamento declarativo para aplicações React
+- **Visualização de Dados** - D3.js e Recharts integrados para visualização de dados poderosa
+- **Gerenciamento de Formulários** - React Hook Form para manipulação eficiente de formulários
+- **Animação** - Framer Motion para animações de interface suaves
+- **Testes** - Configuração das bibliotecas Jest e React Testing
 
-## 📋 Prerequisites
+## 📋 Pré-requisitos
 
-- Node.js (v14.x or higher)
-- npm or yarn
+- Node.js (v14.x ou superior)
+- npm ou yarn
 
-## 🛠️ Installation
+## 🛠️ Instalação
 
-1. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-   
-2. Start the development server:
-   ```bash
-   npm start
-   # or
-   yarn start
-   ```
+1. Instale as dependências:
 
-## 📁 Project Structure
+``bash
+
+npm install
+
+# ou
+
+yarn install
+
+```
+
+2. Inicie Servidor de desenvolvimento:
+
+``bash
+
+npm start
+
+# ou
+
+yarn start
+
+```
+
+## 📁 Estrutura do Projeto
 
 ```
 react_app/
-├── public/             # Static assets
+├── public/ # Recursos estáticos
 ├── src/
-│   ├── components/     # Reusable UI components
-│   ├── pages/          # Page components
-│   ├── styles/         # Global styles and Tailwind configuration
-│   ├── App.jsx         # Main application component
-│   ├── Routes.jsx      # Application routes
-│   └── index.jsx       # Application entry point
-├── .env                # Environment variables
-├── index.html          # HTML template
-├── package.json        # Project dependencies and scripts
-├── tailwind.config.js  # Tailwind CSS configuration
-└── vite.config.js      # Vite configuration
+│ ├── components/ # Componentes de UI reutilizáveis
+│ ├── pages/ # Componentes de página
+│ ├── styles/ # Estilos globais e configuração do Tailwind
+│ ├── App.jsx # Componente principal da aplicação
+│ ├── Routes.jsx # Rotas da aplicação
+│ └── index.jsx # Ponto de entrada da aplicação
+├── .env # Variáveis ​​de ambiente
+├── index.html # HTML template
+├── package.json # Dependências e scripts do projeto
+├── tailwind.config.js # Configuração CSS do Tailwind
+└── vite.config.js # Configuração do Vite
 ```
 
-## 🧩 Adding Routes
-
-To add new routes to the application, update the `Routes.jsx` file:
-
-```jsx
-import { useRoutes } from "react-router-dom";
-import HomePage from "pages/HomePage";
-import AboutPage from "pages/AboutPage";
-
-const ProjectRoutes = () => {
-  let element = useRoutes([
-    { path: "/", element: <HomePage /> },
-    { path: "/about", element: <AboutPage /> },
-    // Add more routes as needed
-  ]);
-
-  return element;
-};
 ```
+## 🎨 Estilização
 
-## 🎨 Styling
+Este projeto utiliza o Tailwind CSS para estilização. A configuração inclui:
 
-This project uses Tailwind CSS for styling. The configuration includes:
+- Plugin Forms para estilização de formulários
+- Plugin Typography para estilização de texto
+- Plugin de proporção para elementos responsivos
+- Consultas de contêiner para design responsivo específico de componentes
+- Tipografia fluida para texto responsivo
+- Utilitários de animação
 
-- Forms plugin for form styling
-- Typography plugin for text styling
-- Aspect ratio plugin for responsive elements
-- Container queries for component-specific responsive design
-- Fluid typography for responsive text
-- Animation utilities
+## 📱 Design Responsivo
 
-## 📱 Responsive Design
+O aplicativo foi desenvolvido com design responsivo utilizando breakpoints do Tailwind CSS.
 
-The app is built with responsive design using Tailwind CSS breakpoints.
+## 📦 Implantação
 
-
-## 📦 Deployment
-
-Build the application for production:
+Para compilar o aplicativo para produção:
 
 ```bash
 npm run build
