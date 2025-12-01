@@ -9,25 +9,25 @@ const QuickActions = ({ userRole = "administrator" }) => {
     const actions = {
       administrator: [
         {
-          label: "Add New Patient",
+          label: "Adicionar novo paciente",
           icon: "UserPlus",
           variant: "default",
           action: () => navigate('/patient-management')
         },
         {
-          label: "Schedule Appointment",
+          label: "Agendar consulta",
           icon: "Calendar",
           variant: "outline",
           action: () => navigate('/appointment-scheduling')
         },
         {
-          label: "Manage Doctors",
+          label: "Gerenciar médicos",
           icon: "UserCheck",
           variant: "outline",
           action: () => navigate('/doctor-management')
         },
         {
-          label: "Generate Report",
+          label: "Gerar relatório",
           icon: "FileText",
           variant: "secondary",
           action: () => console.log('Generate report')
@@ -102,7 +102,7 @@ const QuickActions = ({ userRole = "administrator" }) => {
 
   return (
     <div className="medical-card p-6">
-      <h2 className="text-lg font-semibold text-foreground mb-6">Quick Actions</h2>
+      <h2 className="text-lg font-semibold text-foreground mb-6">Ações rápidas</h2>
       <div className="space-y-3">
         {actions?.map((action, index) => (
           <Button

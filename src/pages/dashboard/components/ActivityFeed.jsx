@@ -6,8 +6,8 @@ const ActivityFeed = () => {
     {
       id: 1,
       type: "appointment",
-      title: "New Appointment Scheduled",
-      description: "Dr. Sarah Johnson - Patient: Michael Rodriguez",
+      title: "Novo agendamento de consulta",
+      description: "Dra. Gabriela da silva - Paciente: Carlos",
       time: "2 minutes ago",
       icon: "Calendar",
       color: "text-medical-blue"
@@ -15,36 +15,36 @@ const ActivityFeed = () => {
     {
       id: 2,
       type: "patient",
-      title: "Patient Registration Completed",
-      description: "Emma Thompson - ID: PT-2024-1031",
-      time: "15 minutes ago",
+      title: "Cadastro do paciente concluído",
+      description: "Lucas henrique - ID: PT-2024-1031",
+      time: "15 minutos atrás",
       icon: "UserPlus",
       color: "text-success-green"
     },
     {
       id: 3,
       type: "emergency",
-      title: "Emergency Alert",
-      description: "Room 302 - Immediate attention required",
-      time: "1 hour ago",
+      title: "Alerta de emergência",
+      description: "Quarto 302 - Requer atenção imediata",
+      time: "1 hora atrás",
       icon: "AlertTriangle",
       color: "text-alert-red"
     },
     {
       id: 4,
       type: "lab",
-      title: "Lab Results Available",
-      description: "Blood work completed for Patient ID: PT-2024-1029",
-      time: "2 hours ago",
+      title: "Resultados de laboratório disponíveis",
+      description: "Exames de sangue concluídos para o paciente ID: PT-2024-1029",
+      time: "2 Horas atrás",
       icon: "FileText",
       color: "text-medical-blue"
     },
     {
       id: 5,
       type: "discharge",
-      title: "Patient Discharge",
-      description: "John Smith - Room 205 discharged successfully",
-      time: "3 hours ago",
+      title: "Alta do paciente",
+      description: "Pedro da silva - Quarto 205 recebeu alta com sucesso",
+      time: "3 Horas atrás",
       icon: "CheckCircle",
       color: "text-success-green"
     }
@@ -53,9 +53,9 @@ const ActivityFeed = () => {
   return (
     <div className="medical-card p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-lg font-semibold text-foreground">Recent Activity</h2>
+        <h2 className="text-lg font-semibold text-foreground">Atividade Recente</h2>
         <button className="text-sm text-primary hover:text-primary/80 font-medium">
-          View All
+          Ver tudo
         </button>
       </div>
       <div className="space-y-4">

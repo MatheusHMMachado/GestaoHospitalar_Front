@@ -5,7 +5,7 @@ import Icon from '../AppIcon';
 const BreadcrumbTrail = ({ customBreadcrumbs = null }) => {
   const location = useLocation();
 
-  // Default breadcrumb mapping based on routes
+  // Mapeamento padrão de trilha de navegação baseado em rotas
   const routeMapping = {
     '/dashboard': { label: 'Dashboard', icon: 'LayoutDashboard' },
     '/patient-management': { label: 'Patient Management', icon: 'Users' },
@@ -15,7 +15,7 @@ const BreadcrumbTrail = ({ customBreadcrumbs = null }) => {
     '/user-registration': { label: 'Registration', icon: 'UserPlus' }
   };
 
-  // Generate breadcrumbs from current path
+  // Gerar trilhas de navegação a partir do caminho atual
   const generateBreadcrumbs = () => {
     if (customBreadcrumbs) {
       return customBreadcrumbs;
@@ -24,7 +24,7 @@ const BreadcrumbTrail = ({ customBreadcrumbs = null }) => {
     const pathSegments = location?.pathname?.split('/')?.filter(segment => segment);
     const breadcrumbs = [];
 
-    // Always start with Dashboard as home
+    // Comece sempre com o Painel de Controle como página inicial.
     if (location?.pathname !== '/dashboard') {
       breadcrumbs?.push({
         label: 'Dashboard',
@@ -33,7 +33,7 @@ const BreadcrumbTrail = ({ customBreadcrumbs = null }) => {
       });
     }
 
-    // Build breadcrumbs from path segments
+    // Construir trilhas de navegação a partir de segmentos de caminho
     let currentPath = '';
     pathSegments?.forEach((segment, index) => {
       currentPath += `/${segment}`;

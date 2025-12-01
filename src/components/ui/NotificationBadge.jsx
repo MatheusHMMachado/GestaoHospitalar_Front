@@ -6,34 +6,34 @@ const NotificationBadge = () => {
   const [notifications, setNotifications] = useState([
     {
       id: 1,
-      type: 'critical',
-      title: 'Emergency Alert',
-      message: 'Patient John Doe requires immediate attention in Room 302',
-      time: '2 minutes ago',
+      type: 'critica',
+      title: 'Alerta de Emergência',
+      message: 'O paciente Johnatan da silva necessita de atenção imediata no quarto 302.',
+      time: '2 minutos atrás',
       read: false
     },
     {
       id: 2,
-      type: 'warning',
-      title: 'Appointment Conflict',
-      message: 'Dr. Smith has overlapping appointments at 2:00 PM',
-      time: '15 minutes ago',
+      type: 'atenção',
+      title: 'Conflito de Agendamento',
+      message: 'O Dr. Smith tem consultas agendadas simultaneamente às 14h.',
+      time: '15 minutos atrás',
       read: false
     },
     {
       id: 3,
-      type: 'info',
-      title: 'Lab Results Ready',
-      message: 'Blood work results available for Patient ID: 12345',
-      time: '1 hour ago',
+      type: 'informativo',
+      title: 'Resultados de laboratório prontos',
+      message: 'Resultados dos exames de sangue disponíveis para o paciente com ID: 12345',
+      time: '1 hora atrás',
       read: true
     },
     {
       id: 4,
-      type: 'success',
-      title: 'Surgery Completed',
-      message: 'Appendectomy for Patient Jane Smith completed successfully',
-      time: '2 hours ago',
+      type: 'sucesso',
+      title: 'Cirurgia concluída',
+      message: 'Apendicectomia da paciente Luiz Henrique concluída com sucesso.',
+      time: '2 Horas atrás',
       read: true
     }
   ]);
@@ -63,24 +63,24 @@ const NotificationBadge = () => {
 
   const getNotificationIcon = (type) => {
     switch (type) {
-      case 'critical':
+      case 'critica':
         return { name: 'AlertTriangle', color: 'text-alert-red' };
-      case 'warning':
+      case 'atenção':
         return { name: 'AlertCircle', color: 'text-caution-amber' };
-      case 'success':
+      case 'sucesso':
         return { name: 'CheckCircle', color: 'text-success-green' };
       default:
-        return { name: 'Info', color: 'text-medical-blue' };
+        return { name: 'info', color: 'text-medical-blue' };
     }
   };
 
   const getNotificationStyle = (type) => {
     switch (type) {
-      case 'critical':
+      case 'critica':
         return 'border-l-alert-red bg-red-50';
-      case 'warning':
+      case 'atenção':
         return 'border-l-caution-amber bg-amber-50';
-      case 'success':
+      case 'sucesso':
         return 'border-l-success-green bg-emerald-50';
       default:
         return 'border-l-medical-blue bg-blue-50';
@@ -123,13 +123,13 @@ const NotificationBadge = () => {
         <div className="absolute right-0 top-full mt-2 w-80 bg-popover border border-border rounded-lg shadow-medical-lg animate-slide-down z-1010">
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-border">
-            <h3 className="text-sm font-semibold text-foreground">Notifications</h3>
+            <h3 className="text-sm font-semibold text-foreground">Notificações</h3>
             {unreadCount > 0 && (
               <button
                 onClick={markAllAsRead}
                 className="text-xs text-primary hover:text-primary/80 font-medium transition-colors duration-200"
               >
-                Mark all as read
+                Marcar todas com lidas
               </button>
             )}
           </div>
@@ -139,7 +139,7 @@ const NotificationBadge = () => {
             {notifications?.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-8 text-center">
                 <Icon name="Bell" size={32} className="text-muted-foreground mb-2" />
-                <p className="text-sm text-muted-foreground">No notifications</p>
+                <p className="text-sm text-muted-foreground">Sem notificações</p>
               </div>
             ) : (
               <div className="py-2">
@@ -187,7 +187,7 @@ const NotificationBadge = () => {
           {notifications?.length > 0 && (
             <div className="px-4 py-3 border-t border-border">
               <button className="w-full text-sm text-primary hover:text-primary/80 font-medium transition-colors duration-200">
-                View all notifications
+                Visualizar todas as notificações
               </button>
             </div>
           )}

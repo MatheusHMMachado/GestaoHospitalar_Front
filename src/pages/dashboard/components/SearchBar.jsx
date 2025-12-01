@@ -8,16 +8,15 @@ const SearchBar = () => {
   const handleSearch = (e) => {
     e?.preventDefault();
     if (searchQuery?.trim()) {
-      console.log('Searching for:', searchQuery);
-      // In real app, this would trigger search functionality
+      console.log('Pesquisar por:', searchQuery);
     }
   };
 
   const quickSearchSuggestions = [
-    { type: 'patient', label: 'Find Patient', icon: 'User' },
-    { type: 'doctor', label: 'Find Doctor', icon: 'UserCheck' },
-    { type: 'appointment', label: 'Find Appointment', icon: 'Calendar' },
-    { type: 'room', label: 'Find Room', icon: 'MapPin' }
+    { type: 'pacientes', label: 'Procurar Paciente', icon: 'User' },
+    { type: 'doutor', label: 'Procurar Doutor', icon: 'UserCheck' },
+    { type: 'agendamento', label: 'Procurar Agendamento', icon: 'Calendar' },
+    { type: 'quartp', label: 'Procurar Quarto', icon: 'MapPin' }
   ];
 
   return (
@@ -31,7 +30,7 @@ const SearchBar = () => {
           />
           <input
             type="text"
-            placeholder="Search patients, doctors, appointments..."
+            placeholder="Procurar pacientes, doutores, agendamentos..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e?.target?.value)}
             onFocus={() => setIsSearchFocused(true)}
@@ -44,7 +43,7 @@ const SearchBar = () => {
       {isSearchFocused && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-popover border border-border rounded-lg shadow-medical-lg z-50 animate-slide-down">
           <div className="p-2">
-            <div className="text-xs font-medium text-muted-foreground px-3 py-2">Quick Search</div>
+            <div className="text-xs font-medium text-muted-foreground px-3 py-2">Pesquisa Rápida</div>
             {quickSearchSuggestions?.map((suggestion, index) => (
               <button
                 key={index}

@@ -12,7 +12,6 @@ const Dashboard = () => {
   const [userRole, setUserRole] = useState('administrator');
   const [currentTime, setCurrentTime] = useState(new Date());
 
-  // Update current time every minute
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -21,11 +20,10 @@ const Dashboard = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Mock user data - in real app, this would come from auth context
   const user = {
-    name: 'Dr. Sarah Johnson',
-    role: 'Chief Medical Officer',
-    department: 'Administration'
+    name: 'Dr. Luis Felipe',
+    role: 'Diretor Médico',
+    department: 'Diretoria'
   };
 
   // Role-specific metrics
@@ -33,7 +31,7 @@ const Dashboard = () => {
     const metrics = {
       administrator: [
         {
-          title: 'Total Patients',
+          title: 'Total de Pacientes',
           value: '1,247',
           change: '+12%',
           changeType: 'increase',
@@ -41,7 +39,7 @@ const Dashboard = () => {
           color: 'primary'
         },
         {
-          title: 'Active Doctors',
+          title: 'Doutores Ativos',
           value: '89',
           change: '+3%',
           changeType: 'increase',
@@ -49,7 +47,7 @@ const Dashboard = () => {
           color: 'success'
         },
         {
-          title: 'Today\'s Appointments',
+          title: 'Consultas de hoje',
           value: '156',
           change: '+8%',
           changeType: 'increase',
@@ -57,7 +55,7 @@ const Dashboard = () => {
           color: 'info'
         },
         {
-          title: 'Bed Occupancy',
+          title: 'Taxa de ocupação de leitos',
           value: '87%',
           change: '-2%',
           changeType: 'decrease',
@@ -67,7 +65,7 @@ const Dashboard = () => {
       ],
       doctor: [
         {
-          title: 'My Patients Today',
+          title: 'Meus pacientes hoje',
           value: '24',
           change: '+2',
           changeType: 'increase',
@@ -75,7 +73,7 @@ const Dashboard = () => {
           color: 'primary'
         },
         {
-          title: 'Appointments',
+          title: 'Agendamentos',
           value: '12',
           change: 'On Schedule',
           changeType: 'increase',
@@ -83,7 +81,7 @@ const Dashboard = () => {
           color: 'success'
         },
         {
-          title: 'Pending Reports',
+          title: 'Relatórios pendentes',
           value: '7',
           change: '-3',
           changeType: 'decrease',
@@ -91,7 +89,7 @@ const Dashboard = () => {
           color: 'warning'
         },
         {
-          title: 'Surgery Queue',
+          title: 'Fila de espera para cirurgia',
           value: '3',
           change: 'Scheduled',
           changeType: 'increase',
@@ -101,7 +99,7 @@ const Dashboard = () => {
       ],
       nurse: [
         {
-          title: 'Assigned Patients',
+          title: 'Pacientes designados',
           value: '18',
           change: '+1',
           changeType: 'increase',
@@ -109,7 +107,7 @@ const Dashboard = () => {
           color: 'primary'
         },
         {
-          title: 'Critical Cases',
+          title: 'Casos Críticos',
           value: '4',
           change: 'Stable',
           changeType: 'increase',
@@ -117,7 +115,7 @@ const Dashboard = () => {
           color: 'error'
         },
         {
-          title: 'Medications Due',
+          title: 'Medicamentos devidos',
           value: '12',
           change: 'On Time',
           changeType: 'increase',
@@ -125,7 +123,7 @@ const Dashboard = () => {
           color: 'success'
         },
         {
-          title: 'Shift Hours',
+          title: 'Horário de trabalho',
           value: '6.5h',
           change: 'Remaining',
           changeType: 'increase',
@@ -135,7 +133,7 @@ const Dashboard = () => {
       ],
       receptionist: [
         {
-          title: 'Check-ins Today',
+          title: 'Check-ins hoje',
           value: '89',
           change: '+15%',
           changeType: 'increase',
@@ -143,7 +141,7 @@ const Dashboard = () => {
           color: 'success'
         },
         {
-          title: 'Appointments Booked',
+          title: 'Consultas agendadas',
           value: '156',
           change: '+8%',
           changeType: 'increase',
@@ -151,7 +149,7 @@ const Dashboard = () => {
           color: 'primary'
         },
         {
-          title: 'Waiting Patients',
+          title: 'Pacientes em espera',
           value: '12',
           change: 'Current',
           changeType: 'increase',
@@ -159,7 +157,7 @@ const Dashboard = () => {
           color: 'warning'
         },
         {
-          title: 'Phone Calls',
+          title: 'Ligações telefônicas',
           value: '47',
           change: '+5',
           changeType: 'increase',
@@ -175,7 +173,7 @@ const Dashboard = () => {
   const metrics = getMetricsForRole(userRole);
 
   const formatTime = (date) => {
-    return date?.toLocaleTimeString('en-US', {
+    return date?.toLocaleTimeString('Pt-BR', {
       hour: '2-digit',
       minute: '2-digit',
       hour12: true
@@ -183,7 +181,7 @@ const Dashboard = () => {
   };
 
   const formatDate = (date) => {
-    return date?.toLocaleDateString('en-US', {
+    return date?.toLocaleDateString('Pt-BR', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
@@ -198,40 +196,26 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-6 py-8">
           <BreadcrumbTrail />
           
-          {/* Welcome Section */}
+          {/* Seção de boas vindas */}
           <div className="mb-8">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
               <div>
                 <h1 className="text-3xl font-bold text-foreground mb-2">
-                  Welcome back, {user?.name}
+                  Bem vindo de volta, {user?.name}
                 </h1>
                 <p className="text-muted-foreground">
                   {formatDate(currentTime)} • {formatTime(currentTime)}
                 </p>
               </div>
-              
-              {/* Role Selector for Demo */}
-              <div className="mt-4 lg:mt-0">
-                <select
-                  value={userRole}
-                  onChange={(e) => setUserRole(e?.target?.value)}
-                  className="px-4 py-2 bg-muted border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-                >
-                  <option value="administrator">Administrator View</option>
-                  <option value="doctor">Doctor View</option>
-                  <option value="nurse">Nurse View</option>
-                  <option value="receptionist">Receptionist View</option>
-                </select>
-              </div>
             </div>
             
-            {/* Search Bar */}
+            {/* Barra de pesquisa */}
             <div className="max-w-2xl">
               <SearchBar />
             </div>
           </div>
 
-          {/* Metrics Cards */}
+          {/* Cartões de medida */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {metrics?.map((metric, index) => (
               <MetricCard
@@ -246,27 +230,27 @@ const Dashboard = () => {
             ))}
           </div>
 
-          {/* Main Content Grid */}
+          {/* Grade de conteúdo principal */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            {/* Activity Feed - Takes 2 columns on large screens */}
+            {/*  Feed de atividades - Ocupa 2 colunas em telas grandes. */}
             <div className="lg:col-span-2">
               <ActivityFeed />
             </div>
             
-            {/* Quick Actions */}
+            {/* Ações rápidas */}
             <div>
               <QuickActions userRole={userRole} />
             </div>
           </div>
 
-          {/* Calendar and Data Visualization */}
+          {/* Calendário e visualização de dados */}
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
-            {/* Calendar Widget */}
+            {/* Widget de calendário  */}
             <div>
               <CalendarWidget />
             </div>
             
-            {/* Data Visualization - Takes 2 columns on extra large screens */}
+            {/* Visualização de dados - Ocupa 2 colunas em telas extragrandes. */}
             <div className="xl:col-span-2">
               <DataVisualization />
             </div>
