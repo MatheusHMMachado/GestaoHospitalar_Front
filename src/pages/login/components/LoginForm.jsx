@@ -27,7 +27,7 @@ const LoginForm = () => {
 
     if (!formData?.password) {
       newErrors.password = 'Senha é obrigatória';
-    } else if (formData?.password?.length < 8) {
+    } else if (formData?.password?.length < 6) {
       newErrors.password = 'A senha deve ter pelo menos 8 caracteres';
     }
 
