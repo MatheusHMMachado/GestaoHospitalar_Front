@@ -35,7 +35,7 @@ const Header = () => {
     },
     {
       label: 'Histórico de Consultas',
-      path: '/historico-consultas', // Ajustei para bater com a rota criada anteriormente
+      path: '/appointment-history',
       icon: 'History',
       isUnderConstruction: false
     }
@@ -44,7 +44,7 @@ const Header = () => {
   // Verifica se o caminho atual é igual ao do item OU se estamos na página de construção vindo desse item
   const isActivePath = (item) => {
     if (location.pathname === item.path) return true;
-    // Opcional: Manter o item ativo visualmente mesmo na página de construção
+    // Mantem o item ativo visualmente mesmo na página de construção
     if (location.pathname === '/construction' && item.isUnderConstruction && location.state?.from === item.path) return true;
     return false;
   };
