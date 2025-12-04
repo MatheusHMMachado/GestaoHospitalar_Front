@@ -1,25 +1,56 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Icon from '../AppIcon';
 
 const UserProfileDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const dropdownRef = useRef(null);
   
-  const user = {
-    name: 'Dr. Luis Felipe',
-    role: 'Diretor Médico',
-    email: 'admin@hospital.com',
-    avatar: null,
-    initials: 'LF'
-  };
+  // Estado inicial padrão
+  const [user, setUser] = useState({
+    name: 'Usuário',
+    role: 'Visitante',
+    email: '',
+    initials: 'US'
+  });
+
+  // 1. Efeito para carregar os dados reais salvos no LocalSotorage, e montar o estado do usuário
+  useEffect(() => {
+    try {
+      const storedData = localStorage.getItem('user_data');
+      if (storedData) {
+        const parsedUser = JSON.parse(storedData);
+        
+        const getInitials = (fullName) => {
+          if (!fullName) return 'U';
+          const names = fullName.split(' ');
+          if (names.length === 1) return names[0].substring(0, 2).toUpperCase();
+          return (names[0][0] + names[names.length - 1][0]).toUpperCase();
+        };
+
+        setUser({
+          name: parsedUser.nome || 'Usuário Sem Nome',
+          role: parsedUser.perfil || 'Sem Perfil',
+          email: parsedUser.email || '',
+          initials: getInitials(parsedUser.nome),
+          avatar: null
+        });
+      }
+    } catch (error) {
+      console.error("Erro ao carregar dados do usuário:", error);
+    }
+  }, []);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const handleLogout = () => {
-    console.log('Saindo...');
+    localStorage.removeItem('user_token');
+    localStorage.removeItem('user_data');
     setIsOpen(false);
+    navigate('/login');
   };
 
   const handleProfileClick = () => {

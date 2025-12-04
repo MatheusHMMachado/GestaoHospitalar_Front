@@ -7,7 +7,7 @@ const MockCredentialsHelper = () => {
 
   const mockUsers = [
     {
-      role: 'Administrator',
+      role: 'Administrador',
       email: 'dana@hospitalcare.com',
       password: 'admin123',
       description: 'Acesso e gerenciamento completos do sistema'

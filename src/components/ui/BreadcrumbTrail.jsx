@@ -8,11 +8,12 @@ const BreadcrumbTrail = ({ customBreadcrumbs = null }) => {
   // Mapeamento padrão de trilha de navegação baseado em rotas
   const routeMapping = {
     '/dashboard': { label: 'Dashboard', icon: 'LayoutDashboard' },
-    '/patient-management': { label: 'Patient Management', icon: 'Users' },
-    '/doctor-management': { label: 'Doctor Management', icon: 'UserCheck' },
-    '/appointment-scheduling': { label: 'Appointment Scheduling', icon: 'Calendar' },
+    '/patient-management': { label: 'Pacientes', icon: 'Users' },
+    '/doctor-management': { label: 'Doutores', icon: 'UserCheck' },
+    '/appointment-scheduling': { label: 'Agendamentos', icon: 'Calendar' },
     '/login': { label: 'Login', icon: 'LogIn' },
-    '/user-registration': { label: 'Registration', icon: 'UserPlus' }
+    '/user-registration': { label: 'Registro de usuários', icon: 'UserPlus' },
+    '/appointment-history': { label: 'Histórico de Consultas', icon: 'History' },
   };
 
   // Gerar trilhas de navegação a partir do caminho atual

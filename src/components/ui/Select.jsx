@@ -156,7 +156,7 @@ const Select = React.forwardRef(({
                 <select
                     name={name}
                     value={value || ''}
-                    onChange={() => { }} // Controlado pela nossa lógica personalizada.
+                    onChange={() => { }}
                     className="sr-only"
                     tabIndex={-1}
                     multiple={multiple}
