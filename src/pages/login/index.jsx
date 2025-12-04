@@ -4,7 +4,6 @@ import WelcomeHeader from './components/WelcomeHeader';
 import LoginForm from './components/LoginForm';
 import TrustSignals from './components/TrustSignals.jsx';
 import SessionWarning from './components/SessionWarning';
-import MockCredentialsHelper from './components/MockCredentialsHelper.jsx';
 
 const LoginPage = () => {
   return (
