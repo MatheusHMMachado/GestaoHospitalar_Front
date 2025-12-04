@@ -5,7 +5,7 @@ import Input from '../../../components/ui/Input';
 import Icon from '../../../components/AppIcon';
 
 const API_URL = import.meta.env.VITE_API_URL; 
-const API_TOKEN = import.meta.env.VITE_API_TOKEN; // O mesmo do Backend
+const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -17,6 +17,17 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+
+  // --- DADOS DE MOCK PARA TESTE RÁPIDO ---
+  const demoAccounts = [
+    { label: 'Admin', email: 'dana@hospitalcare.com', pass: 'admin123', role: 'Administrador' },
+  ];
+
+  // Função para preencher automaticamente
+  const fillCredentials = (email, password) => {
+    setFormData({ email, password });
+    setErrors({}); // Limpa erros se houver
+  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -58,10 +69,9 @@ const LoginForm = () => {
     }
 
     setIsLoading(true);
-    setErrors({}); // Limpa erros antigos
+    setErrors({}); 
 
     try {
-      // 2. CHAMADA O BACKEND
       const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: {
@@ -74,11 +84,9 @@ const LoginForm = () => {
         })
       });
 
-      // 4. TRATAMENTO DE RESPOSTA
       if (response.ok) {
         const data = await response.json();
         
-        // Sucesso: Salva o token e dados do usuário
         localStorage.setItem('user_token', data.token);
         localStorage.setItem('user_data', JSON.stringify({
             nome: data.nome,
@@ -89,7 +97,6 @@ const LoginForm = () => {
         const origin = location.state?.from?.pathname || '/dashboard';
         navigate(origin);
       } else {
-        // Lê como JSON primeiro
         let errorMessage = 'Falha ao realizar login.';
         try {
             const errorData = await response.json();
@@ -132,11 +139,9 @@ const LoginForm = () => {
           disabled={isLoading}
         />
 
-       {/* Wrapper Relativo para posicionar o botão de olho */}
         <div className="relative">
           <Input
             label="Senha:"
-            // 2. Alterna o tipo do input baseado no estado
             type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Digite sua senha"
@@ -145,11 +150,9 @@ const LoginForm = () => {
             error={errors.password}
             required
             disabled={isLoading}
-            // Adiciona padding na direita para o texto não ficar embaixo do ícone
             className="pr-10" 
           />
           
-          {/* 3. Botão de Toggle */}
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -193,14 +196,41 @@ const LoginForm = () => {
           {isLoading ? 'Entrando...' : 'Entrar'}
         </Button>
 
+        {/* --- SEÇÃO DE CONTAS DE TESTE RÁPIDO --- */}
+        <div className="mt-6 pt-6 border-t border-border">
+          <p className="text-xs text-muted-foreground text-center mb-3 uppercase tracking-wider font-semibold">
+            Ambiente de Teste (Clique para preencher)
+          </p>
+          <div className="grid grid-cols-1 gap-2">
+            {demoAccounts.map((acc, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => fillCredentials(acc.email, acc.pass)}
+                className="flex items-center justify-between p-2 rounded-lg border border-gray-200 hover:bg-gray-50 hover:border-primary/50 transition-all group"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${acc.label === 'Admin' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'}`}>
+                    {acc.label.substring(0, 2)}
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm font-medium text-gray-700 group-hover:text-primary">{acc.role}</p>
+                    <p className="text-xs text-gray-500">{acc.email}</p>
+                  </div>
+                </div>
+                <Icon name="Copy" size={16} className="text-gray-400 group-hover:text-primary" />
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="text-center pt-4 border-t border-border">
           <p className="text-sm text-muted-foreground">
             Precisa de acesso ao sistema?{' '}
             <button
               type="button"
-              onClick={() => navigate('/user-registration')}
               className="text-primary hover:text-primary/80 font-medium transition-colors duration-200"
-              disabled={isLoading}
+              onClick={() => alert('Página de registro em desenvolvimento.')}
             >
               Registrar nova conta
             </button>
