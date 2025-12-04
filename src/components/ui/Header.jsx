@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Icon from '../AppIcon';
 import UserProfileDropdown from './UserProfileDropdown';
 import NotificationBadge from './NotificationBadge';
+import { path } from 'd3';
 
 const Header = () => {
   const location = useLocation();
@@ -28,6 +29,11 @@ const Header = () => {
       label: 'Agendamentos',
       path: '/appointment-scheduling',
       icon: 'Calendar'
+    },
+    {
+      label: 'Histórico de Consultas',
+      path: '/appointment-history',
+      icon: 'History'
     }
   ];
 

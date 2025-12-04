@@ -4,6 +4,7 @@ import BreadcrumbTrail from '../../components/ui/BreadcrumbTrail';
 import AppointmentCalendar from './components/AppointmentCalendar';
 import AppointmentForm from './components/AppointmentForm';
 import AppointmentList from './components/AppointmentList';
+import AppointmentHistory from '../appointment-history';
 import DoctorSchedulePanel from './components/DoctorSchedulePanel';
 import AppointmentDetailsModal from './components/AppointmentDetailsModal';
 import Button from '../../components/ui/Button';

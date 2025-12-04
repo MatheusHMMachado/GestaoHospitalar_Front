@@ -9,10 +9,12 @@ const API_TOKEN = import.meta.env.VITE_API_TOKEN; // O mesmo do Backend
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,8 +29,6 @@ const LoginForm = () => {
 
     if (!formData?.password) {
       newErrors.password = 'Senha é obrigatória';
-    } else if (formData?.password?.length < 6) {
-      newErrors.password = 'A senha deve ter pelo menos 8 caracteres';
     }
 
     setErrors(newErrors);
@@ -89,10 +89,17 @@ const LoginForm = () => {
         const origin = location.state?.from?.pathname || '/dashboard';
         navigate(origin);
       } else {
-        // Erro: Tenta ler a mensagem de texto enviada pelo Backend (ex: "Senha inválida")
-        const errorMessage = await response.text();
+        // Lê como JSON primeiro
+        let errorMessage = 'Falha ao realizar login.';
+        try {
+            const errorData = await response.json();
+            errorMessage = errorData.message || errorMessage;
+        } catch (e) {
+            errorMessage = await response.text(); 
+        }
+
         setErrors({
-          general: errorMessage || 'Falha ao realizar login. Verifique suas credenciais.'
+          general: errorMessage
         });
       }
 
@@ -125,17 +132,35 @@ const LoginForm = () => {
           disabled={isLoading}
         />
 
-        <Input
-          label="Senha:"
-          type="password"
-          name="password"
-          placeholder="Digite sua senha"
-          value={formData.password}
-          onChange={handleInputChange}
-          error={errors.password}
-          required
-          disabled={isLoading}
-        />
+       {/* Wrapper Relativo para posicionar o botão de olho */}
+        <div className="relative">
+          <Input
+            label="Senha:"
+            // 2. Alterna o tipo do input baseado no estado
+            type={showPassword ? "text" : "password"}
+            name="password"
+            placeholder="Digite sua senha"
+            value={formData.password}
+            onChange={handleInputChange}
+            error={errors.password}
+            required
+            disabled={isLoading}
+            // Adiciona padding na direita para o texto não ficar embaixo do ícone
+            className="pr-10" 
+          />
+          
+          {/* 3. Botão de Toggle */}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-[41px] text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
+          >
+            <Icon 
+              name={showPassword ? "EyeOff" : "Eye"} 
+              size={20} 
+            />
+          </button>
+        </div>
 
         {errors.general && (
           <div className="flex items-center space-x-2 p-3 bg-red-50 border border-red-200 rounded-lg">

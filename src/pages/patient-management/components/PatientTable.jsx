@@ -41,10 +41,10 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
 
   const getStatusBadge = (status) => {
     const statusConfig = {
-      'Active': { bg: 'bg-success-green/10', text: 'text-success-green', border: 'border-success-green/20' },
-      'Discharged': { bg: 'bg-slate-100', text: 'text-slate-600', border: 'border-slate-200' },
-      'Admitted': { bg: 'bg-medical-blue/10', text: 'text-medical-blue', border: 'border-medical-blue/20' },
-      'Critical': { bg: 'bg-alert-red/10', text: 'text-alert-red', border: 'border-alert-red/20' }
+      'Ativo': { bg: 'bg-success-green/10', text: 'text-success-green', border: 'border-success-green/20' },
+      'Alta': { bg: 'bg-slate-100', text: 'text-slate-600', border: 'border-slate-200' },
+      'Admitido': { bg: 'bg-medical-blue/10', text: 'text-medical-blue', border: 'border-medical-blue/20' },
+      'Critico': { bg: 'bg-alert-red/10', text: 'text-alert-red', border: 'border-alert-red/20' }
     };
 
     const config = statusConfig?.[status] || statusConfig?.['Active'];
@@ -58,7 +58,6 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
 
   return (
     <div className="bg-card border border-border rounded-lg shadow-medical-sm overflow-hidden">
-      {/* Desktop Table */}
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full">
           <thead className="bg-muted/50 border-b border-border">
@@ -68,7 +67,7 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
                   onClick={() => handleSort('patientId')}
                   className="flex items-center space-x-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors"
                 >
-                  <span>Patient ID</span>
+                  <span>ID Paciente</span>
                   {getSortIcon('patientId')}
                 </button>
               </th>
@@ -77,7 +76,7 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
                   onClick={() => handleSort('name')}
                   className="flex items-center space-x-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors"
                 >
-                  <span>Name</span>
+                  <span>Nome</span>
                   {getSortIcon('name')}
                 </button>
               </th>
@@ -86,19 +85,19 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
                   onClick={() => handleSort('age')}
                   className="flex items-center space-x-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors"
                 >
-                  <span>Age</span>
+                  <span>Idade</span>
                   {getSortIcon('age')}
                 </button>
               </th>
               <th className="px-6 py-3 text-left">
-                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Contact</span>
+                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Contato</span>
               </th>
               <th className="px-6 py-3 text-left">
                 <button
                   onClick={() => handleSort('assignedDoctor')}
                   className="flex items-center space-x-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors"
                 >
-                  <span>Assigned Doctor</span>
+                  <span>Médico designado</span>
                   {getSortIcon('assignedDoctor')}
                 </button>
               </th>
@@ -107,7 +106,7 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
                   onClick={() => handleSort('lastVisit')}
                   className="flex items-center space-x-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors"
                 >
-                  <span>Last Visit</span>
+                  <span>Última visita</span>
                   {getSortIcon('lastVisit')}
                 </button>
               </th>
@@ -115,7 +114,7 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
                 <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Status</span>
               </th>
               <th className="px-6 py-3 text-left">
-                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Actions</span>
+                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Ações</span>
               </th>
             </tr>
           </thead>
@@ -190,7 +189,6 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
           </tbody>
         </table>
       </div>
-      {/* Mobile Cards */}
       <div className="md:hidden divide-y divide-border">
         {sortedPatients?.map((patient) => (
           <div 
@@ -215,19 +213,19 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
             
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div>
-                <span className="text-muted-foreground">Age:</span>
+                <span className="text-muted-foreground">Idade:</span>
                 <span className="ml-1 text-foreground">{patient?.age}</span>
               </div>
               <div>
-                <span className="text-muted-foreground">Phone:</span>
+                <span className="text-muted-foreground">Celular:</span>
                 <span className="ml-1 text-foreground">{patient?.phone}</span>
               </div>
               <div className="col-span-2">
-                <span className="text-muted-foreground">Doctor:</span>
+                <span className="text-muted-foreground">Doutor:</span>
                 <span className="ml-1 text-foreground">{patient?.assignedDoctor}</span>
               </div>
               <div className="col-span-2">
-                <span className="text-muted-foreground">Last Visit:</span>
+                <span className="text-muted-foreground">Última Visita:</span>
                 <span className="ml-1 text-foreground">{patient?.lastVisit}</span>
               </div>
             </div>
@@ -242,7 +240,7 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
                   onEditPatient(patient);
                 }}
               >
-                Edit
+                Editar
               </Button>
               <Button
                 variant="ghost"
@@ -254,7 +252,7 @@ const PatientTable = ({ patients, onPatientSelect, onEditPatient, onDeletePatien
                 }}
                 className="text-destructive hover:text-destructive"
               >
-                Delete
+              Deletar
               </Button>
             </div>
           </div>

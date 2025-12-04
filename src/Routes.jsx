@@ -10,6 +10,7 @@ import Dashboard from './pages/dashboard';
 import AppointmentScheduling from './pages/appointment-scheduling';
 import UserRegistration from './pages/user-registration';
 import ProtectedRoute from "./ProtectedRoute";
+import AppointmentHistory from "pages/appointment-history";
 
 const Routes = () => {
   return (
@@ -27,6 +28,7 @@ const Routes = () => {
         {/* --- ROTAS PRIVADAS (Protegidas pelo Guardião) --- */}
         <Route element={<ProtectedRoute />}>
           {/* Todas as rotas aqui dentro exigem token válido */}
+          <Route path="/appointment-history" element={<AppointmentHistory />} />
           <Route path="/patient-management" element={<PatientManagement />} />
           <Route path="/doctor-management" element={<DoctorManagement />} />
           <Route path="/dashboard" element={<Dashboard />} />
