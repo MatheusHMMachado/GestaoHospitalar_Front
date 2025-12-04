@@ -11,6 +11,7 @@ import AppointmentScheduling from './pages/appointment-scheduling';
 import UserRegistration from './pages/user-registration';
 import ProtectedRoute from "./ProtectedRoute";
 import AppointmentHistory from "pages/appointment-history";
+import ConstructionPage from "pages/ConstructionPage";
 
 const Routes = () => {
   return (
@@ -33,6 +34,7 @@ const Routes = () => {
           <Route path="/doctor-management" element={<DoctorManagement />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/appointment-scheduling" element={<AppointmentScheduling />} />
+          <Route path="/construction" element={<ConstructionPage />} />
         </Route>
 
         {/* Rota 404 - Página não encontrada */}
