@@ -22,8 +22,6 @@ const LoginPage = () => {
             <TrustSignals />
             <SessionWarning />
           </div>
-          
-          <MockCredentialsHelper />
 
           {/* Footer */}
           <div className="mt-8 text-center">
