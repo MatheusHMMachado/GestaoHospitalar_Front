@@ -20,7 +20,7 @@ const LoginForm = () => {
 
   // --- DADOS DE MOCK PARA TESTE RÁPIDO ---
   const demoAccounts = [
-    { label: 'Admin', email: 'dana@hospitalcare.com', pass: 'admin123', role: 'Administrador' },
+    { label: 'Admin', email: 'admin@hospital.com', pass: '123456', role: 'Administrador' },
   ];
 
   // Função para preencher automaticamente
