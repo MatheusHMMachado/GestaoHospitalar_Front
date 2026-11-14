@@ -1,0 +1,23 @@
+services:
+  frontend-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gestao-hospitalar-front
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+
+  frontend-test:
+    image: node:20-alpine
+    container_name: gestao-hospitalar-test
+    volumes:
+      - .:/app 
+      # Isola o node_modules no container para evitar o erro EIO do Windows
+      - /app/node_modules 
+    working_dir: /app
+    command: sh -c "npm install --legacy-peer-deps && npm run test"
+    env_file:
+      - .env # Indentação corrigida
+    environment:
+      - CI=true # Garante que o Jest rode sem congelar a tela

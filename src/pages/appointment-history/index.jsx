@@ -123,10 +123,11 @@ const AppointmentHistory = () => {
               />
 
               {/* Seletor de Estratégia (Recurso Educativo) */}
+              {                           
               <div className="space-y-1">
                 <label className="text-sm font-medium text-gray-700">Modo de Pesquisa</label>
                 <select
-                  name="strategy"
+                  name="strategy"                  
                   value={filters.strategy}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
@@ -135,7 +136,7 @@ const AppointmentHistory = () => {
                   <option value="sequencial">🐢 Lenta (Sequencial)</option>
                   <option value="hash">⚙️ Hash Join</option>
                 </select>
-              </div>
+              </div>}
 
               <Button
                 type="submit"

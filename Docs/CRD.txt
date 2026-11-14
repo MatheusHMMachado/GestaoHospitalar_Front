@@ -1,0 +1,15 @@
+Admin:
+admin@hospitalcare.com
+admin123
+
+Doctor:
+doctor@hospitalcare.com 
+doctor123 
+
+Patient:
+nurse@hospitalcare.com 
+nurse123 
+
+Reception:
+reception@hospitalcare.com
+reception123
